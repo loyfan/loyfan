@@ -1,0 +1,43 @@
+name: CI
+#on: [push]
+# 在master分支发生push事件时触发。
+on: workflow_dispatch
+
+#  push:
+#    branches:
+#      - MCM
+#env: # 设置环境变量
+#  TZ: Asia/Shanghai # 时区（设置时区可使页面中的`最近更新时间`使用时区时间）
+
+jobs:
+  build: # 自定义名称
+    runs-on: ubuntu-latest # 运行在虚拟机环境ubuntu-latest
+
+    steps:
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          export
+          ls -alt 
+          whoami
+          id
+          node -v
+
+      - name: Checkout # 步骤1
+        uses: actions/checkout@v1
+        with:
+          ref: MCM  # optional
+
+      - run: ls -alt 
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+          cache: yarn
+
+      - run: |
+          export
+          ls -alt
+          node -v
